@@ -1,0 +1,75 @@
+#:kivy 2.0.0
+
+Root:
+
+    BoxLayout:
+        orientation: 'vertical'
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: 'Load'
+                on_release: root.show_load()
+
+        BoxLayout:
+            Image:
+                id: image
+                source:""
+                allow_stretch: True
+                keep_ratio: True
+                Label:
+                    pos: image.pos
+                    halign: 'center'
+                    text: "Your image"
+                    font_size: 14
+
+            Image:
+                id: image1
+                source:""
+                allow_stretch: True
+                keep_ratio: True
+                Label:
+                    pos: image1.pos
+                    halign: 'center'
+                    text: "Most similar #1"
+                    font_size: 14
+
+            Image:
+                id: image2
+                source:""
+                allow_stretch: True
+                keep_ratio: True
+                Label:
+                    pos: image2.pos
+                    halign: 'center'
+                    text: "Most similar #2"
+                    font_size: 14
+
+
+<LoadDialog>:
+    id:load_dialog
+
+    BoxLayout:
+        cols:2
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+
+        FileChooserIconView:
+            id: filechooser
+            on_selection:load_dialog.selected(filechooser.selection)
+
+        BoxLayout:
+            size_hint_y: None
+            height: 30
+            Button:
+                text: "Cancel"
+                on_release: root.cancel()
+
+            Button:
+                text: "Load"
+                on_release: root.load(filechooser.selection)
+
+        Image:
+            id:image
+            source:""
